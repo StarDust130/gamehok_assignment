@@ -306,7 +306,7 @@ export function Header() {
       <div className="flex items-center space-x-4 ml-auto">
         <div className="flex items-center bg-[#0d2212] rounded-full px-3 py-1.5 border border-accent hover:bg-[#063110]">
           <Image
-            src="/gamehok-coin.webp"
+            src="/coin.webp"
             alt="Coin"
             width={16}
             height={16}
