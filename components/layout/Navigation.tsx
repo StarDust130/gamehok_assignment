@@ -6,88 +6,102 @@ import Image from "next/image";
 // import { House, Trophy, Users, ChatTeardrop } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 
-// 1. Home Icon: Fixed to a thickened, heavily rounded pentagon with a distinct center dash.
+// 1. Home Icon: Corrected to include the inner resting door.
 const HomeIcon = ({ active }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      d="M5 10l6.2-5.4a2 2 0 012.6 0L20 10v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9z" 
-      fill={active ? "#00d26a" : "none"}
-      stroke={active ? "none" : "#8A9990"} 
-      strokeWidth="2.2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round" 
-    />
-    <path 
-      d="M12.5 14v4" 
-      stroke={active ? "#031308" : "#8A9990"} 
-      strokeWidth="2.5" 
-      strokeLinecap="round" 
-    />
+    {active ? (
+      <>
+        <path d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z" fill="#00d26a" />
+        <path d="M10 21v-5h4v5" fill="#031308" />
+      </>
+    ) : (
+      <>
+        <path d="M4 10l8-7 8 7v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9z" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M10 21v-4h4v4" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </>
+    )}
   </svg>
 );
 
-// 2. Trophy Icon: Fixed active state to include white handles and white star.
+// 2. Trophy Icon: Fixed to match exact image (Green solid body, white star, green outlined handles).
 const TrophyIcon = ({ active }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     {active ? (
       <>
-        {/* White Handles */}
-        <path d="M7 7H4.5C3.12 7 2 8.12 2 9.5S3.12 12 4.5 12H7" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
-        <path d="M17 7h2.5c1.38 0 2.5 1.12 2.5 2.5S20.88 12 19.5 12H17" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
-        {/* Green Body & Base */}
-        <path d="M7 4h10v6c0 3-2.5 5.5-5 5.5S7 10 7 4z" fill="#00d26a" />
-        <path d="M12 15.5V19m-3 0h6" stroke="#00d26a" strokeWidth="2.5" strokeLinecap="round" />
-        {/* White Star Cutout */}
-        <path d="M12 6.5l1 2.2 2.4.3-1.8 1.6.5 2.4-2.1-1.2-2.1 1.2.5-2.4-1.8-1.6 2.4-.3L12 6.5z" fill="#ffffff" />
+        <path d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1" stroke="#00d26a" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z" fill="#00d26a" />
+        <path d="M12 15v4M9 19h6" stroke="#00d26a" strokeWidth="1.5" strokeLinecap="round" />
+        {/* Precise White Star */}
+        <path d="M12 7l.8 1.5 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.6.8.3-1.7-1.2-1.2 1.7-.2L12 7z" fill="#ffffff" />
       </>
     ) : (
       <>
-        <path d="M7 4h10v6c0 3-2.5 5.5-5 5.5S7 10 7 4z" stroke="#8A9990" strokeWidth="2.2" strokeLinejoin="round" />
-        <path d="M7 7H4.5C3.12 7 2 8.12 2 9.5S3.12 12 4.5 12H7M17 7h2.5c1.38 0 2.5 1.12 2.5 2.5S20.88 12 19.5 12H17" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
-        <path d="M12 15.5V19m-3 0h6" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z" stroke="#8A9990" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 15v4M9 19h6" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
       </>
     )}
   </svg>
 );
 
-// 3. Social Icon: Thickened intersecting strokes for inactive; preserved dual-tone for active.
+// 3. Social Icon: Implemented proper background-masking to perfectly break the stroke overlaps.
 const SocialIcon = ({ active }) => (
-  <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    {active ? (
-      <>
-        <circle cx="17" cy="7" r="3.5" fill="#ffffff" />
-        <path d="M12 15c1.5-1 4-1.5 7.5-1.5 2.5 0 4.5 1 4.5 3.5V20h-7" fill="#ffffff" />
-        <circle cx="9" cy="10" r="4" fill="#00d26a" stroke="#031308" strokeWidth="2.5" />
-        <path d="M2 21c0-3.5 3-5.5 7-5.5s7 2 7 5.5v1H2v-1z" fill="#00d26a" stroke="#031308" strokeWidth="2.5" />
-      </>
-    ) : (
-      <>
-        <circle cx="17" cy="7" r="3.5" stroke="#8A9990" strokeWidth="2.2" />
-        <path d="M13 18.5c0-2.5 2.5-4 5.5-4s5.5 1.5 5.5 4" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
-        <circle cx="9" cy="10" r="4" stroke="#8A9990" strokeWidth="2.2" />
-        <path d="M2 21c0-3 3.1-5 7-5s7 2 7 5" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
-      </>
-    )}
+  <svg
+    width="26"
+    height="24"
+    viewBox="0 0 26 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Back Person (Drawn first, forced to white when active) */}
+    <circle
+      cx="16"
+      cy="8"
+      r="3"
+      stroke={active ? "#ffffff" : "#8A9990"}
+      strokeWidth="1.5"
+    />
+    <path
+      d="M14 18v-1c0-2 2-3.5 5-3.5s5 1.5 5 3.5v1"
+      stroke={active ? "#ffffff" : "#8A9990"}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+
+    {/* Front Person (Drawn second, green when active, masks back person with background fill) */}
+    <circle
+      cx="9"
+      cy="11"
+      r="3.5"
+      stroke={active ? "#00d26a" : "#8A9990"}
+      fill="#031308"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M2 21v-1c0-2.5 2.5-4.5 7-4.5s7 2 7 4.5v1"
+      stroke={active ? "#00d26a" : "#8A9990"}
+      fill="#031308"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
-// 4. Chat Icon: Corrected geometry from an oval to a rounded rectangle with offset tail.
+// 4. Chat Icon: Fixed geometry to round-rect with tail on bottom right. Used negative-space strokes for active lines.
 const ChatIcon = ({ active }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path 
-      d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-2l-3 3v-3H8a4 4 0 0 1-4-4V8z" 
-      fill={active ? "#00d26a" : "none"}
-      stroke={active ? "none" : "#8A9990"} 
-      strokeWidth="2.2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    />
-    <path 
-      d="M9 10h6M9 14h3" 
-      stroke={active ? "#031308" : "#8A9990"} 
-      strokeWidth="2.2" 
-      strokeLinecap="round" 
-    />
+    {active ? (
+      <>
+        <path d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z" fill="#00d26a" />
+        {/* Negative Space Cutouts matching the background color */}
+        <path d="M8 9.5h8M8 13.5h5" stroke="#031308" strokeWidth="2" strokeLinecap="round" />
+      </>
+    ) : (
+      <>
+        <path d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z" stroke="#8A9990" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M8 10h8M8 14h5" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
+      </>
+    )}
   </svg>
 );
 
