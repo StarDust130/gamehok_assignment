@@ -1,8 +1,5 @@
 "use client";
 
-// ============================================================================
-// IMPORTS
-// ============================================================================
 
 import {
   SocialStarBanner,
@@ -13,24 +10,10 @@ import {
   WatchBestTournaments,
 } from "@/components/home";
 
-// ============================================================================
-// PAGE COMPONENT
-// ============================================================================
 
-/**
- * Home Page
- *
- * Main landing page with tournament info, social features, and video content.
- * Uses production-level component architecture with clear section separation.
- *
- * Layout:
- * - Left Sidebar (68%): Featured content and tournaments
- * - Right Sidebar (32%): Video content section
- * - Mobile: Stacked vertically with full width
- */
 export default function Home() {
   return (
-    <div className="flex flex-col lg:flex-row min-h-full divide-y lg:divide-y-0 lg:divide-x divide-[#1b3523] w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8">
+    <div className="flex flex-col lg:flex-row min-h-full divide-y lg:divide-y-0 lg:divide-x divide-[#1b3523] w-full max-w-360 mx-auto px-4 md:px-6 lg:px-8">
       {/* ====================================================================
           LEFT CONTENT AREA - Main Content Section (68% Desktop, 100% Mobile)
           ==================================================================== */}
