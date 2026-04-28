@@ -1,6 +1,8 @@
 ## GameHok Assignment 🌟
 
-
+<p align="center">
+    <img src="public/anime-profile-pic.webp" alt="Hero preview image" width="720" />
+</p>
 
 <p align="center">
 	<strong>A polished esports-style Next.js experience built for the GameHok assignment.</strong>
