@@ -215,7 +215,9 @@ export function Header() {
         </div>
       </div>
       <div className="hidden md:flex flex-1"></div>
-
+      <div className="hidden md:flex items-center justify-center relative mx-4">
+       
+      </div>
       <div className="flex items-center space-x-4 ml-auto">
         <div className="flex items-center bg-[#0d2212] rounded-full px-3 py-1.5 border border-accent hover:bg-[#063110]">
           <Image
@@ -230,6 +232,10 @@ export function Header() {
         <button className="text-gray-300 hover:text-white relative">
           <Bell size={24} />
           <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-[#020d06]"></span>
+          <span
+            aria-hidden="true"
+            className="absolute -right-3 top-1/2 h-6 w-px -translate-y-1/2 bg-[#d6f1de]"
+          />
         </button>
         <div className="w-10 h-10 hidden md:block relative overflow-hidden rounded-full border-2 border-transparent hover:border-accent transition-colors ml-4 cursor-pointer">
           <Image

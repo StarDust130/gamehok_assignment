@@ -109,8 +109,8 @@ export default function TournamentDetailPage() {
   const data = TOURNAMENT_DATA;
 
   return (
-    <div className="min-h-screen bg-[#050C08] text-white font-sans pb-24 selection:bg-[#00d26a] selection:text-black">
-      <div className="max-w-[1100px] mx-auto px-4 md:px-6 pt-4 md:pt-6">
+    <div className="min-h-screen bg-[#050C08] text-white font-sans selection:bg-[#00d26a] selection:text-black">
+      <div className="max-w-[1100px] mx-auto px-4 md:px-6 pt-4 md:pt-6 pb-32 md:pb-8">
         {/* TOP NAVIGATION */}
         <div className="flex justify-between items-center mb-4">
           <button className="flex items-center gap-2 text-[13px] font-bold text-white/90 hover:text-white transition-colors">
@@ -349,9 +349,9 @@ export default function TournamentDetailPage() {
       </div>
 
       {/* ========================================== */}
-      {/* BOTTOM PROGRESS BAR                        */}
+      {/* BOTTOM PROGRESS BAR (Respects sidebar on desktop, above BottomNav on mobile) */}
       {/* ========================================== */}
-      <div className="fixed bottom-0 left-0 right-0 py-4 bg-[#0a150f] border-t border-[#1b3523] z-50 text-center shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+      <div className="fixed left-0 right-0 py-4 bg-[#0a150f] border-t border-[#1b3523] z-40 text-center shadow-[0_-10px_20px_rgba(0,0,0,0.5)] bottom-0 md:left-64 w-full md:w-auto">
         <span className="text-[14px] font-bold text-white/70 tracking-wide">
           Tournament is in progress
         </span>
