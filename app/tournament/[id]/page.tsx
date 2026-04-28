@@ -20,11 +20,37 @@ import { TournamentSkeleton } from "@/components/skeletons/TournamentSkeleton";
 import Link from "next/link";
 import HireMe from "@/components/HireMe";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import { getTournamentById } from "@/lib/tournaments";
 
 // ==========================================
 // 1. MOCK DATA (Matched EXACTLY to images)
 // ==========================================
-const TOURNAMENT_DATA = {
+type FullTournament = {
+  title: string;
+  game: string;
+  entry: string;
+  organizer: { name: string; logo: string; email: string };
+  banner: string;
+  registrationStatus: string;
+  participants: string;
+  details: {
+    teamSize: string;
+    format: string;
+    starts: string;
+    checkIn: string;
+  };
+  prizePool: string;
+  prizeDistribution: { rank: string; amount: string }[];
+  rounds: {
+    name: string;
+    round: string;
+    desc: string;
+    format: string;
+    time: string;
+  }[];
+};
+const TOURNAMENT_DATA: FullTournament = {
   title: "DOMINION SERIES - LEGION CUP",
   game: "FREE FIRE",
   entry: "Entry - Free",
@@ -175,7 +201,13 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
         </span>
         <span className="text-[15px] font-black text-white flex items-center gap-1.5">
           {data.prizePool}{" "}
-          <Image src="/coin.webp" alt="coin" width={16} height={16} className="w-4 h-4" />
+          <Image
+            src="/coin.webp"
+            alt="coin"
+            width={16}
+            height={16}
+            className="w-4 h-4"
+          />
         </span>
       </div>
       {data.prizeDistribution.map((prize, idx) => (
@@ -188,7 +220,13 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
           </span>
           <span className="text-[14px] font-bold text-white/90 flex items-center gap-1.5">
             {prize.amount}{" "}
-            <Image src="/coin.webp" alt="coin" width={16} height={16} className="w-4 h-4" />
+            <Image
+              src="/coin.webp"
+              alt="coin"
+              width={16}
+              height={16}
+              className="w-4 h-4"
+            />
           </span>
         </div>
       ))}
@@ -204,11 +242,27 @@ export default function TournamentDetailPage() {
   const [activeTab, setActiveTab] = useState<
     "Overview" | "Teams" | "Lobbies" | "Rules"
   >("Overview");
-  const [activeRound, setActiveRound] = useState<(typeof LOBBY_ROUNDS)[number]>(
-    "Round 1"
-  );
+  const [activeRound, setActiveRound] =
+    useState<(typeof LOBBY_ROUNDS)[number]>("Round 1");
   const [isLoading, setIsLoading] = useState(true);
-  const data = TOURNAMENT_DATA;
+  // Use route param to select tournament data so each tournament page is unique
+  const params = useParams() as { id?: string } | null;
+  const routeId = params?.id as string | undefined;
+  const found = routeId ? getTournamentById(routeId) : undefined;
+
+  // Merge found lightweight tournament into the more detailed page data shape
+  const data: FullTournament = found
+    ? {
+        ...TOURNAMENT_DATA,
+        title: found.title ?? TOURNAMENT_DATA.title,
+        game: found.game ?? TOURNAMENT_DATA.game,
+        entry: found.entry ?? TOURNAMENT_DATA.entry,
+        participants: found.participants ?? TOURNAMENT_DATA.participants,
+        registrationStatus: found.status ?? TOURNAMENT_DATA.registrationStatus,
+        banner: found.image ?? TOURNAMENT_DATA.banner,
+        prizePool: found.pool ?? TOURNAMENT_DATA.prizePool,
+      }
+    : TOURNAMENT_DATA;
 
   const handleTabChange = (tab: (typeof TABS)[number]) => {
     setActiveTab(tab);
@@ -391,32 +445,34 @@ export default function TournamentDetailPage() {
                   Rounds and Schedule
                 </h2>
                 <div className="flex flex-col">
-                  {data.rounds.map((r, idx) => (
-                    <div
-                      key={idx}
-                      className="flex justify-between items-start border-b border-[#1b3523] pb-5 mb-5 last:border-0 last:pb-0 last:mb-0"
-                    >
-                      <div>
-                        <p className="text-[14px] font-black text-white mb-1">
-                          {r.name}{" "}
-                          <span className="text-white/50 font-normal">
-                            ({r.round})
+                  {data.rounds.map(
+                    (r: FullTournament["rounds"][number], idx: number) => (
+                      <div
+                        key={idx}
+                        className="flex justify-between items-start border-b border-[#1b3523] pb-5 mb-5 last:border-0 last:pb-0 last:mb-0"
+                      >
+                        <div>
+                          <p className="text-[14px] font-black text-white mb-1">
+                            {r.name}{" "}
+                            <span className="text-white/50 font-normal">
+                              ({r.round})
+                            </span>
+                          </p>
+                          <p className="text-[13px] text-white/70 font-medium">
+                            {r.desc}
+                          </p>
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className="bg-[#2d1b36] text-[#d8b4fe] text-[10px] font-bold px-2 py-0.5 rounded">
+                            {r.format}
                           </span>
-                        </p>
-                        <p className="text-[13px] text-white/70 font-medium">
-                          {r.desc}
-                        </p>
+                          <p className="text-[12px] font-bold text-white/90">
+                            {r.time}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-end gap-2">
-                        <span className="bg-[#2d1b36] text-[#d8b4fe] text-[10px] font-bold px-2 py-0.5 rounded">
-                          {r.format}
-                        </span>
-                        <p className="text-[12px] font-bold text-white/90">
-                          {r.time}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
               </div>
 
