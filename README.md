@@ -1,7 +1,7 @@
-# GameHok Assignment 🌟
+## GameHok Assignment 🌟
 
 <p align="center">
-	<img src="https://c.tenor.com/BrCcrHCNYt8AAAAC/tenor.gif" alt="Gaming motion gif" width="320" />
+    <img src="public/preview.png" alt="Hero preview image" width="720" />
 </p>
 
 <p align="center">
@@ -41,78 +41,90 @@ https://gamehok-assignment-stardust.vercel.app/
 - Tailwind CSS 4
 - Framer Motion
 - Lucide React
+<p align="center">
+	<img alt="version-badge" src="https://img.shields.io/badge/version-0.1.0-blue.svg" />
+	&nbsp;
+	<a href="https://gamehok-assignment-stardust.vercel.app/"><img alt="Live Demo" src="https://img.shields.io/badge/Live-Demo-brightgreen.svg" /></a>
+</p>
 
-## Approach 🧠
+<h1 align="center">GameHok Assignment — Playful Tournament UI</h1>
 
-The app is structured around reusable UI sections so the home page can feel rich without becoming hard to maintain. The design leans on strong spacing, dark gaming-inspired surfaces, crisp typography, and animated transitions to make the interface feel lively.
+<p align="center">🚀 A polished, production-feeling Next.js demo showcasing tournaments, social feeds, and live-style UI interactions.</p>
 
-Key ideas behind the build:
+---
 
-- Split the experience into focused content blocks instead of one oversized page
-- Keep the UI responsive across desktop and mobile breakpoints
-- Use skeleton states to avoid abrupt loading flashes
-- Organize shared components so pages stay small and readable
+## Preview 👀
 
-## Folder Structure 📁
+<p align="center">
+ 	<img src="https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" alt="Preview GIF" width="720" />
+</p>
 
-```text
-app/
-	globals.css
-	layout.tsx
-	page.tsx
-	chat/
-		page.tsx
-	social/
-		page.tsx
-	tournament/
-		[id]/
-			page.tsx
-	tournaments/
-		page.tsx
-components/
-	game/
-		home/
-			BouncyBirdPromo.tsx
-			DailyBattles.tsx
-			FeaturedTournaments.tsx
-			GamesCarousel.tsx
-			SocialStarBanner.tsx
-			TournamentCard.tsx
-			WatchBestTournaments.tsx
-	layout/
-		Navigation.tsx
-	skeletons/
-		HomeSkeleton.tsx
-		TournamentSkeleton.tsx
-lib/
-	tournaments.ts
-public/
-types/
-```
+Live demo: https://gamehok-assignment-stardust.vercel.app/
 
-## Getting Started 🚀
+## Why this project? ✨
 
-Install dependencies:
+- Built to showcase a modern, responsive UI for esports-style tournaments and social features.
+- Focus on delightful micro-interactions, motion, and polished loading states.
+- Fast to iterate on: component-first structure with clear separation of concerns.
+
+---
+
+If you'd like a different color theme (red/blue/dark) or a personal hero screenshot, tell me your preference and I'll swap it in.
+
+## Production-ready Highlights ✅
+
+- App Router structure for scalable routing
+- Component-driven pages and skeleton loading states
+- Tailwind CSS for rapid, consistent styling
+- Framer Motion for smooth, attention-grabbing transitions
+- Clean project layout ready for feature expansion
+
+## Tech Stack 🛠️
+
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Lucide React (icons)
+
+## Quick Start (Local) 🧭
+
+Clone, install, and run locally:
 
 ```bash
+git clone https://github.com/StarDust130/gamehok_assignment.git
+cd gamehok_assignment
 npm install
-```
-
-Run the development server:
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open http://localhost:3000 to explore.
 
-## Build & Run
+## Build & Production
 
 ```bash
 npm run build
 npm run start
 ```
 
-## Notes 💡
+## Folder Snapshot 📂
 
-This project is deployed on Vercel and styled to feel like a playable esports dashboard. If you want, I can also turn this into a more personal portfolio-style README with your name, role, and contact links.
+Key areas to explore:
+
+- `app/` — Pages, routing, and layouts
+- `components/` — Reusable UI blocks (home, layout, skeletons)
+- `lib/` — Lightweight helpers and data stubs
+- `public/` — Static assets and images
+
+## Contributing / Customizing 🔧
+
+- Want this as a portfolio piece? I can add your name, role, and contact CTA.
+- Need a dark/light theme toggle or CMS integration? I can wire that up.
+
+## Contact ✉️
+
+If you'd like a custom version of this README with your name, links, or a nicer screenshot, tell me what to include and I'll update it.
+
+---
+
+Made with ❤️ for the GameHok assignment.
