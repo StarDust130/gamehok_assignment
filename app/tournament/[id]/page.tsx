@@ -8,11 +8,18 @@ import {
   CalendarDays,
   Clock,
   Trophy,
-  Mail,
   Waypoints,
+  ShieldCheck,
+  Smartphone,
+  WifiOff,
+  Ban,
+  Target,
+  Gavel,
 } from "lucide-react";
 import { TournamentSkeleton } from "@/components/skeletons/TournamentSkeleton";
 import Link from "next/link";
+import HireMe from "@/components/HireMe";
+import Image from "next/image";
 
 // ==========================================
 // 1. MOCK DATA (Matched EXACTLY to images)
@@ -66,6 +73,94 @@ const TOURNAMENT_DATA = {
   ],
 };
 
+const LOBBY_ROUNDS = ["Round 1", "Round 2", "Round 3"] as const;
+
+const LOBBIES = Array.from({ length: 12 }, (_, idx) => ({
+  id: idx + 1,
+  status: "Yet to be scheduled",
+}));
+
+const RULE_SECTIONS = [
+  {
+    id: "1",
+    title: "Team Structure",
+    icon: Users,
+    points: [
+      "4 main players per team",
+      "1 substitute (optional)",
+      "Total 5 players maximum",
+    ],
+  },
+  {
+    id: "2",
+    title: "Age Requirement",
+    icon: ShieldCheck,
+    points: ["Player must be at least 16 years old to participate."],
+  },
+  {
+    id: "3",
+    title: "Game Mode",
+    icon: Target,
+    points: ["Matches are played in Battle Royale - Squad Mode."],
+  },
+  {
+    id: "4",
+    title: "Match Format",
+    icon: CalendarDays,
+    points: [
+      "Usually 6 matches per day",
+      "Maps commonly include Bermuda, Purgatory, Kalahari, and Alpine",
+    ],
+  },
+  {
+    id: "5",
+    title: "Points System",
+    icon: Trophy,
+    points: [
+      "Teams earn points based on placement plus kills",
+      "Booyah (1st place) gives around 12 points",
+      "Each kill gives 1 point",
+    ],
+  },
+  {
+    id: "6",
+    title: "Fair Play Rules",
+    icon: Ban,
+    points: [
+      "No hacks, cheats, ESP, or aimbot",
+      "No unauthorized emulators or software",
+      "No teaming with enemy teams",
+    ],
+  },
+  {
+    id: "7",
+    title: "Device Rules",
+    icon: Smartphone,
+    points: [
+      "Usually mobile devices only (no PC unless allowed by tournament)",
+    ],
+  },
+  {
+    id: "8",
+    title: "Internet and Disconnect",
+    icon: WifiOff,
+    points: [
+      "If a player disconnects, the match usually continues unless there is a server issue",
+    ],
+  },
+  {
+    id: "9",
+    title: "Penalties",
+    icon: Gavel,
+    points: [
+      "Warning",
+      "Point deduction",
+      "Match loss",
+      "Team disqualification",
+    ],
+  },
+] as const;
+
 // ==========================================
 // 2. REUSABLE MODULES
 // ==========================================
@@ -80,7 +175,7 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
         </span>
         <span className="text-[15px] font-black text-white flex items-center gap-1.5">
           {data.prizePool}{" "}
-          <img src="/coin.webp" alt="coin" className="w-4 h-4" />
+          <Image src="/coin.webp" alt="coin" width={16} height={16} className="w-4 h-4" />
         </span>
       </div>
       {data.prizeDistribution.map((prize, idx) => (
@@ -93,7 +188,7 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
           </span>
           <span className="text-[14px] font-bold text-white/90 flex items-center gap-1.5">
             {prize.amount}{" "}
-            <img src="/coin.webp" alt="coin" className="w-4 h-4" />
+            <Image src="/coin.webp" alt="coin" width={16} height={16} className="w-4 h-4" />
           </span>
         </div>
       ))}
@@ -105,11 +200,26 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
 // 3. MAIN COMPONENT
 // ==========================================
 export default function TournamentDetailPage() {
+  const TABS = ["Overview", "Teams", "Lobbies", "Rules"] as const;
   const [activeTab, setActiveTab] = useState<
     "Overview" | "Teams" | "Lobbies" | "Rules"
   >("Overview");
+  const [activeRound, setActiveRound] = useState<(typeof LOBBY_ROUNDS)[number]>(
+    "Round 1"
+  );
   const [isLoading, setIsLoading] = useState(true);
   const data = TOURNAMENT_DATA;
+
+  const handleTabChange = (tab: (typeof TABS)[number]) => {
+    setActiveTab(tab);
+
+    requestAnimationFrame(() => {
+      const contentRoot = document.getElementById("tournament-tab-content");
+      if (contentRoot) {
+        contentRoot.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  };
 
   useEffect(() => {
     // Simulate loading time (500ms for smooth transition)
@@ -140,11 +250,14 @@ export default function TournamentDetailPage() {
         </div>
 
         {/* HERO BANNER */}
-        <div className="relative w-full aspect-[21/9] md:aspect-[3.5/1] rounded-xl border border-[#00d26a]/20 overflow-hidden mb-5 shadow-[0_0_20px_rgba(0,210,106,0.05)]">
-          <img
+        <div className="relative w-full h-[190px] sm:h-[250px] md:h-[330px] rounded-xl border border-[#00d26a]/20 overflow-hidden mb-5 shadow-[0_0_20px_rgba(0,210,106,0.05)]">
+          <Image
             src={data.banner}
-            alt="Banner"
-            className="w-full h-full object-cover"
+            alt="Tournament banner"
+            fill
+            priority
+            sizes="(max-width: 640px) 100vw, (max-width: 1200px) 90vw, 1100px"
+            className="object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050C08]/90 via-transparent to-transparent" />
 
@@ -175,21 +288,23 @@ export default function TournamentDetailPage() {
             </div>
           </div>
 
-          <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-[#9333ea] shadow-[0_0_15px_rgba(147,51,234,0.4)] shrink-0">
-            <img
+          <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border border-[#9333ea] shadow-[0_0_15px_rgba(147,51,234,0.4)] shrink-0 bg-[#050C08]">
+            <Image
               src={data.organizer.logo}
               alt="Organizer"
-              className="w-full h-full object-cover bg-[#050C08]"
+              fill
+              sizes="64px"
+              className="object-cover"
             />
           </div>
         </div>
 
         {/* TABS NAVIGATION */}
         <div className="flex border-b border-[#1b3523] mb-8 overflow-x-auto scrollbar-hide">
-          {["Overview", "Teams", "Lobbies", "Rules"].map((tab) => (
+          {TABS.map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab as any)}
+              onClick={() => handleTabChange(tab)}
               className={`px-8 py-3.5 font-bold text-[14px] md:text-[15px] transition-colors relative whitespace-nowrap ${
                 activeTab === tab
                   ? "text-white"
@@ -207,6 +322,7 @@ export default function TournamentDetailPage() {
         {/* ========================================== */}
         {/* TAB CONTENT: OVERVIEW                      */}
         {/* ========================================== */}
+        <div id="tournament-tab-content" className="scroll-mt-24" />
         {activeTab === "Overview" && (
           <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
             {/* LEFT COLUMN */}
@@ -345,9 +461,11 @@ export default function TournamentDetailPage() {
                   <div className="p-5">
                     <div className="flex items-center gap-3 mb-5">
                       <div className="w-8 h-8 rounded border border-[#9333ea] overflow-hidden bg-[#050C08]">
-                        <img
+                        <Image
                           src={data.organizer.logo}
                           alt="Logo"
+                          width={32}
+                          height={32}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -361,6 +479,112 @@ export default function TournamentDetailPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "Teams" && (
+          <div className="bg-[#07130d] border border-[#17412a] rounded-2xl p-4 md:p-8 shadow-[0_0_30px_rgba(0,210,106,0.08)]">
+            <HireMe page="team details" />
+          </div>
+        )}
+
+        {activeTab === "Lobbies" && (
+          <div className="space-y-5 md:space-y-6 pb-20 md:pb-24">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+              {LOBBY_ROUNDS.map((round) => (
+                <button
+                  key={round}
+                  onClick={() => setActiveRound(round)}
+                  className={`px-4 py-1.5 rounded-full text-[12px] font-bold whitespace-nowrap transition-colors border cursor-pointer ${
+                    activeRound === round
+                      ? "bg-[#053a25] text-[#7CFFBF] border-[#00d26a]"
+                      : "bg-[#1e2a23] text-white/70 border-[#33443b] hover:text-white"
+                  }`}
+                >
+                  {round}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+              {LOBBIES.map((lobby) => (
+                <div
+                  key={lobby.id}
+                  className="rounded-xl border border-[#17412a] bg-[#081a12] p-4 md:p-5 shadow-[0_10px_24px_rgba(0,0,0,0.25)]"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-[15px]  font-black leading-none">
+                      Lobby {lobby.id}
+                    </h3>
+                    <button className="text-[10px] md:text-[11px] font-bold uppercase text-[#00d26a] hover:text-[#4dffab] transition-colors cursor-pointer tracking-wide">
+                      View Participants
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2 text-white/85 text-[12px] md:text-[13px] font-medium">
+                    <span className="w-4 h-4 rounded-full  flex items-center justify-center text-[10px]">
+                      🕒
+                    </span>
+                    <span>{lobby.status}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === "Rules" && (
+          <div className="pb-10">
+            <div className="relative overflow-hidden rounded-2xl border border-[#1e5134] bg-gradient-to-br from-[#0c1f16] via-[#08160f] to-[#050d09] p-4 md:p-8 shadow-[0_0_40px_rgba(0,210,106,0.08)] mb-5 md:mb-6">
+              <div className="absolute -top-16 -right-12 w-44 h-44 rounded-full bg-[#00d26a]/10 blur-3xl" />
+              <div className="absolute -bottom-14 -left-10 w-40 h-40 rounded-full bg-[#12a55e]/10 blur-3xl" />
+              <p className="text-[10px]  text-[#86f7be] uppercase tracking-[0.18em] font-black mb-1.5">
+                Tournament Handbook
+              </p>
+              <h2 className="text-[20px] font-black leading-tight">
+                Official Rules and Participation Policy
+              </h2>
+              <p className="text-[12px]  text-white/70 mt-2.5 max-w-3xl">
+                Follow these rules to keep matches competitive, fair, and smooth
+                for every squad.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
+              {RULE_SECTIONS.map((section) => {
+                const Icon = section.icon;
+
+                return (
+                  <div
+                    key={section.id}
+                    className="rounded-xl border border-[#17412a] bg-[#081710] p-3.5 md:p-5"
+                  >
+                    <div className="flex items-center gap-2.5 mb-2.5">
+                      <span className="w-7 h-7 rounded-lg bg-[#0f2f1f] border border-[#1f5d3d] flex items-center justify-center text-[#52f0a0] text-[11px] font-black">
+                        {section.id}
+                      </span>
+                      <div className="w-7 h-7 rounded-lg bg-[#0b2217] border border-[#1a4a31] flex items-center justify-center text-[#00d26a]">
+                        <Icon size={14} />
+                      </div>
+                      <h3 className="text-[14px] md:text-[15px] font-black leading-tight text-white">
+                        {section.title}
+                      </h3>
+                    </div>
+
+                    <ul className="space-y-2">
+                      {section.points.map((point) => (
+                        <li
+                          key={point}
+                          className="text-[12px] md:text-[13px] text-white/80 leading-relaxed flex items-start gap-2"
+                        >
+                          <span className="w-1.5 h-1.5 mt-2 rounded-full bg-[#00d26a] shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
