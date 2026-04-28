@@ -15,7 +15,7 @@ export function Sidebar() {
   const pathname = usePathname();
   return (
     <aside className="hidden md:flex flex-col w-64 h-screen border-r border-card-border bg-[#020d06] text-gray-400 fixed left-0 top-0">
-      <div className="p-6">
+      <div className="p-6 flex items-center text-white">
         <Image
           src="/logo.png"
           alt="Gamehok"
@@ -23,6 +23,7 @@ export function Sidebar() {
           height={40}
           className="w-auto h-8"
         />
+        <span className="font-bold text-2xl">AMHOK</span>
       </div>
       <nav className="flex-1 px-4 mt-6 space-y-2">
         {navItems.map((item) => {
@@ -79,7 +80,12 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-[#020d06]/80 backdrop-blur-md border-b border-card-border w-full flex items-center justify-between px-4 sm:px-6 md:px-8 py-4 h-[72px]">
       <div className="flex md:hidden items-center">
         <div className="w-8 h-8 md:hidden relative overflow-hidden rounded-full bg-gray-700">
-          <Image src="/logo.png" alt="Profile" fill className="object-cover" />
+          <Image
+            src="/anime-profile-pic.webp"
+            alt="Profile"
+            fill
+            className="object-cover"
+          />
         </div>
       </div>
       <div className="hidden md:flex flex-1"></div>
