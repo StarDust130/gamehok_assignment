@@ -250,14 +250,14 @@ export default function TournamentDetailPage() {
         </div>
 
         {/* HERO BANNER */}
-        <div className="relative w-full h-[190px] sm:h-[250px] md:h-[330px] rounded-xl border border-[#00d26a]/20 overflow-hidden mb-5 shadow-[0_0_20px_rgba(0,210,106,0.05)]">
+        <div className="relative w-full h-[190px] sm:h-[250px] md:h-[420px] rounded-xl border border-[#00d26a]/20 overflow-hidden mb-5 shadow-[0_0_20px_rgba(0,210,106,0.05)]">
           <Image
             src={data.banner}
             alt="Tournament banner"
             fill
             priority
             sizes="(max-width: 640px) 100vw, (max-width: 1200px) 90vw, 1100px"
-            className="object-cover object-center"
+            className="object-cover object-center md:object-top"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050C08]/90 via-transparent to-transparent" />
 
@@ -300,7 +300,7 @@ export default function TournamentDetailPage() {
         </div>
 
         {/* TABS NAVIGATION */}
-        <div className="flex border-b border-[#1b3523] mb-8 overflow-x-auto scrollbar-hide">
+        <div className="flex border-b border-[#1b3523] mb-8 overflow-hidden scrollbar-hide">
           {TABS.map((tab) => (
             <button
               key={tab}
