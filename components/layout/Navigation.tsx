@@ -205,6 +205,7 @@ export function Sidebar() {
           width={140}
           height={40}
           className="w-auto h-8"
+          priority
         />
         <span className="font-bold text-2xl">AMHOK</span>
       </div>
