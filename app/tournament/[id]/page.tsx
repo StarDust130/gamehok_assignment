@@ -354,7 +354,7 @@ export default function TournamentDetailPage() {
         </div>
 
         {/* TABS NAVIGATION */}
-        <div className="flex border-b border-[#1b3523] mb-8 overflow-hidden scrollbar-hide">
+        <div className="flex border-b border-[#1b3523] mb-8 overflow-x-auto scrollbar-hide">
           {TABS.map((tab) => (
             <button
               key={tab}
