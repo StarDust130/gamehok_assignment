@@ -24,7 +24,7 @@ export const TournamentCard = ({
   badgeColor = "bg-black/60 text-white",
 }: TournamentCardProps) => {
   return (
-    <div className="w-full max-w-[400px] min-w-[280px] bg-[#050C08] border border-[#122b1a] rounded-[16px] overflow-hidden flex flex-col relative group hover:border-[#22c55e] transition-colors shadow-lg">
+    <div className="w-full max-w-[400px] min-w-[280px] bg-[#050C08] border border-[#122b1a] rounded-[16px] overflow-hidden flex flex-col relative group hover:border-[#22c55e] transition-colors shadow-lg cursor-pointer">
       {/* Image Section */}
       <div className="relative h-[180px] w-full">
         {/* Status Badge (Top Left) */}

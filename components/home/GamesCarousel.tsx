@@ -10,28 +10,29 @@ interface Game {
 
 const GAMES_DATA: Game[] = [
   {
-    name: "BGMI",
-    img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300",
-  },
-  {
     name: "FREE FIRE",
-    img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300",
+    img: "/free_fire_logo.png",
   },
   {
     name: "COD MOBILE",
-    img: "https://images.unsplash.com/photo-1605380587593-c4e95ccb8c2d?w=300",
-  },
-  {
-    name: "PUBG PC",
-    img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300",
+    img: "/cod_mobile_logo.png",
   },
   {
     name: "VALORANT",
-    img: "https://images.unsplash.com/photo-1605380587593-c4e95ccb8c2d?w=300",
+    img: "/valorant_logo.png",
   },
   {
-    name: "ROCKET LEAGUE",
-    img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300",
+    name: "CS 2",
+    img: "/cs2_pc_logo.png",
+  },
+  {
+    name: "PUBG PC",
+    img: "/pubg_pc_logo.png",
+  },
+
+  {
+    name: "Moba 5v5",
+    img: "/moba_5v5_image.jpg",
   },
 ];
 
