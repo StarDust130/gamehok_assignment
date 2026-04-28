@@ -32,7 +32,7 @@ export default function RootLayout({
         <Sidebar />
         <div className="flex-1 flex flex-col md:ml-64 md:border-l md:border-[#1b3523] overflow-hidden">
           <Header />
-          <main className="flex-1 overflow-y-auto w-full pb-24 md:pb-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <main className="flex-1 overflow-y-auto w-full pb-24 md:pb-0 ">
             {children}
           </main>
         </div>
