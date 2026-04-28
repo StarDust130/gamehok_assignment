@@ -7,11 +7,11 @@ export default function HireMe({page="tournaments"}: {page: string}) {
     <div className="flex flex-col items-center justify-center w-full h-[70vh]  text-center space-y-4">
       <h1 className="text-3xl font-bold text-accent">Hire Me! 🚀</h1>
       <Image
-        src="https://i.giphy.com/s51SqVVt0Yuh6b6HL8.webp"
+        src="/hire.webp"
         alt="Profile"
-        width={100}
-        height={100}
-        className="rounded-md shadow-lg"
+        width={300}
+        height={300}
+        className="shadow-lg rounded-xl md:rounded-sm border border-[#00d26a]/20"
       />
       <p className="text-gray-300">Please hire to view your {page}.</p>
       <Link
