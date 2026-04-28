@@ -6,7 +6,7 @@ import { PostsIcon, FollowersIcon, LikesIcon, StatIcon } from "./Icons";
 export const SocialStarBanner = () => (
   <section className="relative w-full max-w-[850px] overflow-hidden rounded-[20px] bg-[linear-gradient(110deg,#02451C_0%,#056C2B_35%,#01230D_100%)] flex items-center min-h-[130px] md:min-h-[160px] shadow-lg">
     {/* Background Star Element */}
-    <div className="absolute left-2 md:left-auto md:right-12 top-1/2 -translate-y-1/2 w-[150px] h-[150px] pointer-events-none z-0">
+    <div className="absolute left-3 md:left-auto md:right-12 top-1/2 -translate-y-1/2 w-[120px] h-[120px] md:w-[150px] md:h-[150px] pointer-events-none z-0">
       <Image
         src="/star.webp"
         alt="Star"
@@ -17,9 +17,9 @@ export const SocialStarBanner = () => (
     </div>
 
     {/* Content Container */}
-    <div className="relative z-10 w-full pl-[220px] pr-4 py-4 md:px-10 md:py-6 md:w-[65%] flex flex-col justify-center">
+    <div className="relative z-10 w-full pl-[200px] pr-4 py-4 md:px-10 md:py-6 md:w-[65%] flex flex-col justify-center">
       {/* Heading */}
-      <h2 className="text-[18px] md:text-[25px] font-bold text-white leading-[1.25] md:leading-[1.1] mb-2 tracking-tight">
+      <h2 className="text-[16px] md:text-[25px] font-bold text-white leading-[1.25] md:leading-[1.1] mb-2 tracking-tight">
         Be the Gamehok&apos;s
         <span className="md:hidden">
           <br />
@@ -29,7 +29,7 @@ export const SocialStarBanner = () => (
       </h2>
 
       {/* Description */}
-      <p className="text-white/95 text-[14px] md:text-[15px] font-semibold mb-5 md:mb-6 mt-2 leading-[1.4] max-w-[180px] md:max-w-none">
+      <p className="text-white/95 text-[12px] md:text-[15px] font-semibold mb-4 md:mb-6 mt-1 md:mt-2 leading-[1.4] max-w-[180px] md:max-w-none">
         Earn rewards by levelling up
         <span className="md:hidden">
           <br />
@@ -39,7 +39,7 @@ export const SocialStarBanner = () => (
       </p>
 
       {/* Stat Icons */}
-      <div className="flex gap-4 md:gap-6">
+      <div className="flex gap-2 md:gap-6">
         <StatIcon
           icon={<PostsIcon />}
           label="Posts"
