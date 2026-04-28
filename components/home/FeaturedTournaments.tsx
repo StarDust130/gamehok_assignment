@@ -1,6 +1,7 @@
 "use client";
 
 import { TournamentCard } from "./TournamentCard";
+import { featuredTournaments } from "@/lib/tournaments";
 
 export const FeaturedTournaments = () => (
   <section className="w-full">
@@ -17,35 +18,25 @@ export const FeaturedTournaments = () => (
     {/* Tournament Cards Carousel */}
     {/* Enforces horizontal scrolling, hides scrollbars natively, and enables scroll snapping */}
     <div className="flex overflow-x-auto gap-4 md:gap-5 snap-x snap-mandatory pb-4 -mx-4 px-4 md:mx-0 md:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-      {/* Wrapper 1: Prevents Flex Squashing and enforces Snap alignment */}
-      <div className="shrink-0 snap-center md:snap-start w-[85vw] sm:w-[340px] md:w-[360px]">
-        <TournamentCard
-          title="DOMINION SERIES - LEGION CUP"
-          game="FREE FIRE"
-          mode="SQUAD"
-          entry="Free"
-          pool="200000"
-          participants="864/864"
-          status="Ongoing"
-          image="/tournament-1.png"
-          badgeColor="bg-black/60 text-white" // Corrected to match visual references
-        />
-      </div>
-
-      {/* Wrapper 2: Prevents Flex Squashing and enforces Snap alignment */}
-      <div className="shrink-0 snap-center md:snap-start w-[85vw] sm:w-[340px] md:w-[360px]">
-        <TournamentCard
-          title="GS MONTHLY SHOWDOWN"
-          game="FREE FIRE"
-          mode="SQUAD"
-          entry="Free"
-          pool="20000"
-          participants="517/576"
-          status="Ongoing"
-          image="/tournament-2.png"
-          badgeColor="bg-black/60 text-white" // Corrected to match visual references
-        />
-      </div>
+      {featuredTournaments.map((tournament) => (
+        <div
+          key={tournament.id}
+          className="shrink-0 snap-center md:snap-start w-[85vw] sm:w-85 md:w-90"
+        >
+          <TournamentCard
+            href={`/tournament/${tournament.id}`}
+            title={tournament.title}
+            game={tournament.game}
+            mode={tournament.mode}
+            entry={tournament.entry}
+            pool={tournament.pool}
+            participants={tournament.participants}
+            status={tournament.status}
+            image={tournament.image}
+            badgeColor={tournament.badgeColor}
+          />
+        </div>
+      ))}
     </div>
   </section>
-);;
+);

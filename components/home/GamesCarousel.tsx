@@ -106,7 +106,7 @@ export const GamesCarousel = () => {
         {canScrollLeft && (
           <button
             onClick={() => scrollGames("left")}
-            className="absolute z-30 top-1/2 -translate-y-1/2 left-0 md:-left-4 hidden md:flex p-1.5 md:p-2 rounded-full bg-[#1b3523]/90 backdrop-blur-sm text-white hover:bg-[#00d26a] hover:shadow-[0_0_15px_rgba(0,210,106,0.3)] transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+            className="absolute z-30 top-1/2 -translate-y-1/2 left-2 hidden md:flex p-1.5 md:p-2 rounded-full bg-[#1b3523]/90 backdrop-blur-sm text-white hover:bg-[#00d26a] hover:shadow-[0_0_15px_rgba(0,210,106,0.3)] transition-all cursor-pointer opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
             aria-label="Scroll left"
           >
             <ChevronLeft size={24} strokeWidth={2.5} className="mr-0.5" />
@@ -117,7 +117,7 @@ export const GamesCarousel = () => {
         {canScrollRight && (
           <button
             onClick={() => scrollGames("right")}
-            className="absolute z-30 top-1/2 -translate-y-1/2 right-0 md:-right-4 hidden md:flex p-1.5 md:p-2 rounded-full bg-[#1b3523]/90 backdrop-blur-sm text-white hover:bg-[#00d26a] hover:shadow-[0_0_15px_rgba(0,210,106,0.3)] transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+            className="absolute z-30 top-1/2 -translate-y-1/2 right-2 hidden md:flex p-1.5 md:p-2 rounded-full bg-[#1b3523]/90 backdrop-blur-sm text-white hover:bg-[#00d26a] hover:shadow-[0_0_15px_rgba(0,210,106,0.3)] transition-all cursor-pointer opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
             aria-label="Scroll right"
           >
             <ChevronRight size={24} strokeWidth={2.5} className="ml-0.5" />
@@ -128,6 +128,7 @@ export const GamesCarousel = () => {
         <div
           ref={gamesScrollRef}
           onScroll={checkScroll}
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           className="md:flex grid grid-cols-3 overflow-x-auto gap-3 md:gap-4 snap-x snap-mandatory pb-4 scrollbar-hide [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 md:mx-0 md:px-0"
         >
           {GAMES_DATA.map((game) => (

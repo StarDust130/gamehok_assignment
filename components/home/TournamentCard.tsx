@@ -1,6 +1,8 @@
+import Link from "next/link";
 import Image from "next/image";
 
 interface TournamentCardProps {
+  href: string;
   title: string;
   game: string;
   mode: string;
@@ -13,6 +15,7 @@ interface TournamentCardProps {
 }
 
 export const TournamentCard = ({
+  href,
   title,
   game,
   mode,
@@ -24,9 +27,12 @@ export const TournamentCard = ({
   badgeColor = "bg-black/60 text-white",
 }: TournamentCardProps) => {
   return (
-    <div className="w-full max-w-[400px] min-w-[280px] bg-[#050C08] border border-[#122b1a] rounded-[16px] overflow-hidden flex flex-col relative group hover:border-[#22c55e] transition-colors shadow-lg cursor-pointer">
+    <Link
+      href={href}
+      className="w-full max-w-100 min-w-70 bg-[#050C08] border border-[#122b1a] rounded-2xl overflow-hidden flex flex-col relative group hover:border-[#22c55e] transition-colors shadow-lg cursor-pointer"
+    >
       {/* Image Section */}
-      <div className="relative h-[180px] w-full">
+      <div className="relative h-45 w-full">
         {/* Status Badge (Top Left) */}
         <div
           className={`absolute top-3 left-3 z-20 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold tracking-wide ${badgeColor}`}
@@ -59,12 +65,12 @@ export const TournamentCard = ({
         <Image
           src={image}
           alt={title}
+          fill
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            fill
         />
 
         {/* Prize Pool Strip */}
-        <div className="absolute bottom-0 left-0 right-0 h-[38px] bg-[#1c2227]/90 backdrop-blur-sm z-10 flex items-center px-4">
+        <div className="absolute bottom-0 left-0 right-0 h-9.5 bg-[#1c2227]/90 backdrop-blur-sm z-10 flex items-center px-4">
           <svg
             width="16"
             height="16"
@@ -89,7 +95,7 @@ export const TournamentCard = ({
         </div>
 
         {/* Organizer Badge */}
-        <div className="absolute -bottom-5 right-4 z-30 w-[46px] h-[46px] bg-gradient-to-br from-[#4c1d95] to-[#2e1065] border border-[#9333ea] rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(147,51,234,0.6)] overflow-hidden">
+        <div className="absolute -bottom-5 right-4 z-30 w-11.5 h-11.5 bg-linear-to-br from-[#4c1d95] to-[#2e1065] border border-[#9333ea] rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(147,51,234,0.6)] overflow-hidden">
           <img
             src="/organizer-logo.jpeg"
             alt="Logo"
@@ -107,13 +113,13 @@ export const TournamentCard = ({
 
         {/* Badge Tags */}
         <div className="flex flex-wrap gap-2 text-[11px]">
-          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-[4px] font-bold uppercase tracking-wide">
+          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-sm font-bold uppercase tracking-wide">
             {game}
           </span>
-          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-[4px] font-bold uppercase tracking-wide">
+          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-sm font-bold uppercase tracking-wide">
             {mode}
           </span>
-          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-[4px] font-bold tracking-wide flex items-center">
+          <span className="bg-[#021d0e] text-white px-2.5 py-1.5 rounded-sm font-bold tracking-wide flex items-center">
             Entry - {entry}
             {entry === "Free" && (
               <img
@@ -125,6 +131,6 @@ export const TournamentCard = ({
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
