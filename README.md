@@ -1,7 +1,7 @@
-# GameHok Assignment
+# GameHok Assignment 🌟
 
 <p align="center">
-	<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2FhN2I5N2JkMmRhZThlYjA2ZGE4YjI1MWU0MzE0MTA4M2E5Y2VkMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7aD2saalBwwftBIY/giphy.gif" alt="Gaming motion gif" width="320" />
+	<img src="https://c.tenor.com/BrCcrHCNYt8AAAAC/tenor.gif" alt="Gaming motion gif" width="320" />
 </p>
 
 <p align="center">
