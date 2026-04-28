@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HireMe({page="tournaments"}: {page: string}) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh] text-center space-y-4">
+    <div className="flex flex-col items-center justify-center w-full h-[70vh]  text-center space-y-4">
       <h1 className="text-3xl font-bold text-accent">Hire Me! 🚀</h1>
       <p className="text-gray-300">Please hire to view your {page}.</p>
   <Link
@@ -13,7 +13,7 @@ export default function HireMe({page="tournaments"}: {page: string}) {
           target="_blank"
           rel="noopener noreferrer"
         >
-      <button className="bg-accent text-white py-2 px-4 rounded-md hover:bg-accent-hover transition-colors cursor-pointer hover:scale-105 transform hover:shadow-lg ">
+      <button className="bg-accent text-white py-2 font-semibold px-4 rounded-md hover:bg-accent-hover transition-colors cursor-pointer hover:scale-105 transform hover:shadow-lg ">
       
           Hire Me
       </button>

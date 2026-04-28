@@ -70,16 +70,13 @@ export default function Home() {
               width={220}
               height={220}
               className="object-contain relative z-20 scale-110 md:scale-100 drop-shadow-[0_0_30px_#22c55e]"
-              style={{
-                filter: "hue-rotate(240deg) saturate(200%) brightness(1.2)",
-              }}
             />
           </div>
         </section>
-        <hr className="border-[#1b3523] my-8 w-full block" />
+
         {/* 2. Featured Tournaments */}
         <section>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4  ">
             <h3 className="text-lg md:text-xl font-bold text-white">
               Featured Tournaments
             </h3>
@@ -111,14 +108,11 @@ export default function Home() {
               badgeColor="bg-[#9f1239] shadow-purple-900/50"
             />
           </div>
-          {/* Active green divider bar under featured tournaments */}
-          <div className="w-full h-1 bg-[#1b3523] mt-2 rounded-full overflow-hidden">
-            <div className="w-1/3 h-full bg-[#22c55e] rounded-full"></div>
-          </div>
+  
         </section>
         <hr className="border-[#1b3523] my-8 w-full hidden md:block" />
+
         {/* 3. Bouncy Bird Promo (Mobile Only) */}
-        
         <section className="relative w-[calc(100%-2rem)] w-full h-[150px] md:hidden  my-4 rounded-2xl overflow-hidden block cursor-pointer">
           {/* Background Layer */}
           <Image
@@ -180,23 +174,23 @@ export default function Home() {
             </button>
           </div>
         </section>
-   
+
         {/* 4. Play Tournaments by Games - CAROUSEL */}
         <section className="relative">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg md:text-xl font-bold text-white">
               Play Tournaments by Games
             </h3>
-            <div className="hidden md:flex gap-2">
+            <div className=" absolute z-30 top-20   hidden md:flex gap-2 justify-between w-full ">
               <button
                 onClick={() => scrollGames("left")}
-                className="p-1 rounded-full bg-[#1b3523] text-white hover:bg-accent transition-colors"
+                className="p-1 rounded-full bg-[#1b3523] text-white hover:bg-accent transition-colors cursor-pointer"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={() => scrollGames("right")}
-                className="p-1 rounded-full bg-[#1b3523] text-white hover:bg-accent transition-colors"
+                className="p-1 rounded-full bg-[#1b3523] text-white hover:bg-accent transition-colors cursor-pointer"
               >
                 <ChevronRight size={20} />
               </button>
@@ -205,7 +199,7 @@ export default function Home() {
 
           <div
             ref={gamesScrollRef}
-            className="flex overflow-x-auto gap-3 md:gap-4 snap-x pb-4 scrollbar-hide [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 md:mx-0 md:px-0"
+            className="md:flex grid grid-cols-3 overflow-x-auto gap-3 md:gap-4 snap-x pb-4 scrollbar-hide [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 md:mx-0 md:px-0"
           >
             {[
               {
@@ -221,10 +215,6 @@ export default function Home() {
                 img: "https://images.unsplash.com/photo-1605380587593-c4e95ccb8c2d?w=300",
               },
               {
-                name: "CS 2",
-                img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300",
-              },
-              {
                 name: "PUBG PC",
                 img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300",
               },
@@ -235,10 +225,6 @@ export default function Home() {
               {
                 name: "ROCKET LEAGUE",
                 img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300",
-              },
-              {
-                name: "APEX",
-                img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300",
               },
             ].map((g) => (
               <div

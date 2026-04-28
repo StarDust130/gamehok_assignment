@@ -1,14 +1,101 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Trophy, Users, MessageSquare, LogOut, Bell } from "lucide-react";
+import {  LogOut, Bell } from "lucide-react";
 import Image from "next/image";
+// import { House, Trophy, Users, ChatTeardrop } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+
+// 1. Home Icon: Fixed to a thickened, heavily rounded pentagon with a distinct center dash.
+const HomeIcon = ({ active }) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path 
+      d="M5 10l6.2-5.4a2 2 0 012.6 0L20 10v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9z" 
+      fill={active ? "#00d26a" : "none"}
+      stroke={active ? "none" : "#8A9990"} 
+      strokeWidth="2.2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+    />
+    <path 
+      d="M12.5 14v4" 
+      stroke={active ? "#031308" : "#8A9990"} 
+      strokeWidth="2.5" 
+      strokeLinecap="round" 
+    />
+  </svg>
+);
+
+// 2. Trophy Icon: Fixed active state to include white handles and white star.
+const TrophyIcon = ({ active }) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {active ? (
+      <>
+        {/* White Handles */}
+        <path d="M7 7H4.5C3.12 7 2 8.12 2 9.5S3.12 12 4.5 12H7" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M17 7h2.5c1.38 0 2.5 1.12 2.5 2.5S20.88 12 19.5 12H17" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
+        {/* Green Body & Base */}
+        <path d="M7 4h10v6c0 3-2.5 5.5-5 5.5S7 10 7 4z" fill="#00d26a" />
+        <path d="M12 15.5V19m-3 0h6" stroke="#00d26a" strokeWidth="2.5" strokeLinecap="round" />
+        {/* White Star Cutout */}
+        <path d="M12 6.5l1 2.2 2.4.3-1.8 1.6.5 2.4-2.1-1.2-2.1 1.2.5-2.4-1.8-1.6 2.4-.3L12 6.5z" fill="#ffffff" />
+      </>
+    ) : (
+      <>
+        <path d="M7 4h10v6c0 3-2.5 5.5-5 5.5S7 10 7 4z" stroke="#8A9990" strokeWidth="2.2" strokeLinejoin="round" />
+        <path d="M7 7H4.5C3.12 7 2 8.12 2 9.5S3.12 12 4.5 12H7M17 7h2.5c1.38 0 2.5 1.12 2.5 2.5S20.88 12 19.5 12H17" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
+        <path d="M12 15.5V19m-3 0h6" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
+      </>
+    )}
+  </svg>
+);
+
+// 3. Social Icon: Thickened intersecting strokes for inactive; preserved dual-tone for active.
+const SocialIcon = ({ active }) => (
+  <svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    {active ? (
+      <>
+        <circle cx="17" cy="7" r="3.5" fill="#ffffff" />
+        <path d="M12 15c1.5-1 4-1.5 7.5-1.5 2.5 0 4.5 1 4.5 3.5V20h-7" fill="#ffffff" />
+        <circle cx="9" cy="10" r="4" fill="#00d26a" stroke="#031308" strokeWidth="2.5" />
+        <path d="M2 21c0-3.5 3-5.5 7-5.5s7 2 7 5.5v1H2v-1z" fill="#00d26a" stroke="#031308" strokeWidth="2.5" />
+      </>
+    ) : (
+      <>
+        <circle cx="17" cy="7" r="3.5" stroke="#8A9990" strokeWidth="2.2" />
+        <path d="M13 18.5c0-2.5 2.5-4 5.5-4s5.5 1.5 5.5 4" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="9" cy="10" r="4" stroke="#8A9990" strokeWidth="2.2" />
+        <path d="M2 21c0-3 3.1-5 7-5s7 2 7 5" stroke="#8A9990" strokeWidth="2.2" strokeLinecap="round" />
+      </>
+    )}
+  </svg>
+);
+
+// 4. Chat Icon: Corrected geometry from an oval to a rounded rectangle with offset tail.
+const ChatIcon = ({ active }) => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path 
+      d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-2l-3 3v-3H8a4 4 0 0 1-4-4V8z" 
+      fill={active ? "#00d26a" : "none"}
+      stroke={active ? "none" : "#8A9990"} 
+      strokeWidth="2.2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    />
+    <path 
+      d="M9 10h6M9 14h3" 
+      stroke={active ? "#031308" : "#8A9990"} 
+      strokeWidth="2.2" 
+      strokeLinecap="round" 
+    />
+  </svg>
+);
 
 const navItems = [
-  { name: "Home", href: "/", icon: Home },
-  { name: "My Tournament", href: "/tournaments", icon: Trophy },
-  { name: "Social", href: "/social", icon: Users },
-  { name: "Chat", href: "/chat", icon: MessageSquare },
+  { name: "Home", href: "/", icon: HomeIcon },
+  { name: "My Tournament", href: "/tournaments", icon: TrophyIcon },
+  { name: "Social", href: "/social", icon: SocialIcon },
+  { name: "Chat", href: "/chat", icon: ChatIcon },
 ];
 
 export function Sidebar() {
@@ -40,8 +127,8 @@ export function Sidebar() {
           );
         })}
       </nav>
-      <div className="p-6 mt-auto">
-        <button className="flex items-center space-x-3 text-red-500 hover:text-red-400 transition-colors w-full px-4 py-2">
+      <div className="p-6 mt-auto ">
+        <button className="flex items-center space-x-3 text-red-500 hover:text-gray-500 transition-colors w-full px-4 py-2 cursor-not-allowed">
           <LogOut size={20} />
           <span className="font-medium">Logout</span>
         </button>
@@ -52,22 +139,47 @@ export function Sidebar() {
 
 export function BottomNav() {
   const pathname = usePathname();
+
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#031308] border-t border-card-border flex justify-around items-center py-2 z-50 pb-safe">
+    <nav className="md:hidden fixed bottom-0 left-0 w-full h-[68px] bg-[#031308] border-t border-[#1a2e20] flex z-50 pb-safe">
       {navItems.map((item) => {
         const isActive = pathname === item.href;
+        const Icon = item.icon;
+
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`flex flex-col items-center justify-center p-2 transition-colors ${isActive ? "text-accent" : "text-gray-400"}`}
+            // The container must be relative so the indicator absolute positioning anchors to the specific tab width
+            className="relative flex-1 flex flex-col items-center justify-center transition-colors duration-200"
           >
-            <item.icon
-              size={24}
-              className={isActive ? "mb-1 text-accent" : "mb-1"}
-              fill={isActive ? "currentColor" : "none"}
-            />
-            <span className="text-[10px] sm:text-xs">{item.name}</span>
+            {/* 1. Anchored Indicator - Notice top-[-1px] to overlap the border perfectly */}
+            {isActive && (
+              <motion.div
+                layoutId="nav-indicator"
+                className="absolute top-[-1px] w-10 h-[3px] bg-[#00d26a] rounded-b-md shadow-[0_1px_8px_rgba(0,210,106,0.8)]"
+                transition={{ type: "spring", stiffness: 350, damping: 35 }}
+              />
+            )}
+
+            {/* 2. Focused Radial Glow */}
+            {isActive && (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#00d26a]/25 blur-[12px] rounded-full pointer-events-none" />
+            )}
+
+            {/* 3. Z-Index protected Icon and Text */}
+            <div className="relative z-10 flex flex-col items-center gap-[4px] mt-1">
+              <Icon active={isActive} />
+              <span
+                className={`text-[11px] transition-colors duration-200 ${
+                  isActive
+                    ? "text-white font-bold"
+                    : "text-[#8A9990] font-medium"
+                }`}
+              >
+                {item.name}
+              </span>
+            </div>
           </Link>
         );
       })}
@@ -81,7 +193,7 @@ export function Header() {
       <div className="flex md:hidden items-center">
         <div className="w-8 h-8 md:hidden relative overflow-hidden rounded-full bg-gray-700">
           <Image
-            src="/anime-profile-pic.webp"
+            src="/anime-profile-pic.jpg"
             alt="Profile"
             fill
             className="object-cover"
@@ -91,7 +203,7 @@ export function Header() {
       <div className="hidden md:flex flex-1"></div>
 
       <div className="flex items-center space-x-4 ml-auto">
-        <div className="flex items-center bg-[#0d2212] rounded-full px-3 py-1.5 border border-accent">
+        <div className="flex items-center bg-[#0d2212] rounded-full px-3 py-1.5 border border-accent hover:bg-[#063110]">
           <Image
             src="/gamehok-coin.webp"
             alt="Coin"
@@ -99,17 +211,18 @@ export function Header() {
             height={16}
             className="mr-2"
           />
-          <span className="text-white font-bold text-sm">2456</span>
+          <span className="text-white font-bold text-sm">6969</span>
         </div>
         <button className="text-gray-300 hover:text-white relative">
           <Bell size={24} />
           <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-[#020d06]"></span>
         </button>
         <div className="w-10 h-10 hidden md:block relative overflow-hidden rounded-full border-2 border-transparent hover:border-accent transition-colors ml-4 cursor-pointer">
-          <img
-            src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=100&h=100&auto=format&fit=crop"
+          <Image
+            src="/anime-profile-pic.jpg"
             alt="Profile"
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover"
           />
         </div>
       </div>
