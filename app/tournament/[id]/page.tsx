@@ -349,7 +349,7 @@ export default function TournamentDetailPage() {
       </div>
 
       {/* ========================================== */}
-      {/* BOTTOM PROGRESS BAR (Respects sidebar on desktop, above BottomNav on mobile) */}
+      {/* BOTTOM PROGRESS BAR (Respects sidebar on desktop) */}
       {/* ========================================== */}
       <div className="fixed left-0 right-0 py-4 bg-[#0a150f] border-t border-[#1b3523] z-40 text-center shadow-[0_-10px_20px_rgba(0,0,0,0.5)] bottom-0 md:left-64 w-full md:w-auto">
         <span className="text-[14px] font-bold text-white/70 tracking-wide">

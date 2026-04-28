@@ -1,23 +1,44 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {  LogOut, Bell } from "lucide-react";
+import { LogOut, Bell } from "lucide-react";
 import Image from "next/image";
 // import { House, Trophy, Users, ChatTeardrop } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 
 // 1. Home Icon: Corrected to include the inner resting door.
 const HomeIcon = ({ active }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     {active ? (
       <>
-        <path d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z" fill="#00d26a" />
+        <path
+          d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z"
+          fill="#00d26a"
+        />
         <path d="M10 21v-5h4v5" fill="#031308" />
       </>
     ) : (
       <>
-        <path d="M4 10l8-7 8 7v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9z" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M10 21v-4h4v4" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M4 10l8-7 8 7v9a2 2 0 01-2 2H6a2 2 0 01-2-2v-9z"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M10 21v-4h4v4"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </>
     )}
   </svg>
@@ -25,20 +46,57 @@ const HomeIcon = ({ active }) => (
 
 // 2. Trophy Icon: Fixed to match exact image (Green solid body, white star, green outlined handles).
 const TrophyIcon = ({ active }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     {active ? (
       <>
-        <path d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1" stroke="#00d26a" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z" fill="#00d26a" />
-        <path d="M12 15v4M9 19h6" stroke="#00d26a" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+          d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1"
+          stroke="#00d26a"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z"
+          fill="#00d26a"
+        />
+        <path
+          d="M12 15v4M9 19h6"
+          stroke="#00d26a"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
         {/* Precise White Star */}
-        <path d="M12 7l.8 1.5 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.6.8.3-1.7-1.2-1.2 1.7-.2L12 7z" fill="#ffffff" />
+        <path
+          d="M12 7l.8 1.5 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.6.8.3-1.7-1.2-1.2 1.7-.2L12 7z"
+          fill="#ffffff"
+        />
       </>
     ) : (
       <>
-        <path d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z" stroke="#8A9990" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M12 15v4M9 19h6" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+          d="M6 4h12v5.5c0 3-2.5 5.5-6 5.5s-6-2.5-6-5.5V4z"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M6 6H3v2.5c0 1.6 1.4 3 3 3h1M18 6h3v2.5c0 1.6-1.4 3-3 3h-1"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M12 15v4M9 19h6"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
       </>
     )}
   </svg>
@@ -89,17 +147,41 @@ const SocialIcon = ({ active }) => (
 
 // 4. Chat Icon: Fixed geometry to round-rect with tail on bottom right. Used negative-space strokes for active lines.
 const ChatIcon = ({ active }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     {active ? (
       <>
-        <path d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z" fill="#00d26a" />
+        <path
+          d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z"
+          fill="#00d26a"
+        />
         {/* Negative Space Cutouts matching the background color */}
-        <path d="M8 9.5h8M8 13.5h5" stroke="#031308" strokeWidth="2" strokeLinecap="round" />
+        <path
+          d="M8 9.5h8M8 13.5h5"
+          stroke="#031308"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
       </>
     ) : (
       <>
-        <path d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z" stroke="#8A9990" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M8 10h8M8 14h5" stroke="#8A9990" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+          d="M20 16V6c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h10l4 4v-4z"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M8 10h8M8 14h5"
+          stroke="#8A9990"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
       </>
     )}
   </svg>
@@ -153,6 +235,11 @@ export function Sidebar() {
 
 export function BottomNav() {
   const pathname = usePathname();
+
+  // Hide bottom nav on tournament detail pages (mobile only)
+  if (pathname.startsWith("/tournament/")) {
+    return null;
+  }
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 w-full h-[68px] bg-[#031308] border-t border-[#1a2e20] flex z-50 pb-safe">
@@ -215,9 +302,7 @@ export function Header() {
         </div>
       </div>
       <div className="hidden md:flex flex-1"></div>
-      <div className="hidden md:flex items-center justify-center relative mx-4">
-       
-      </div>
+      <div className="hidden md:flex items-center justify-center relative mx-4"></div>
       <div className="flex items-center space-x-4 ml-auto">
         <div className="flex items-center bg-[#0d2212] rounded-full px-3 py-1.5 border border-accent hover:bg-[#063110]">
           <Image
