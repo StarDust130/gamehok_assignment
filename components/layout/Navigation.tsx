@@ -319,7 +319,7 @@ export function Header() {
           <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-[#020d06]"></span>
           <span
             aria-hidden="true"
-            className="absolute -right-3 top-1/2 h-6 w-px -translate-y-1/2 bg-[#d6f1de]"
+            className="absolute hidden md:block -right-3 top-1/2 h-6 w-px -translate-y-1/2 bg-[#d6f1de]"
           />
         </button>
         <div className="w-10 h-10 hidden md:block relative overflow-hidden rounded-full border-2 border-transparent hover:border-accent transition-colors ml-4 cursor-pointer">
