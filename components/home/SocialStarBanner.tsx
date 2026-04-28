@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { PostsIcon, FollowersIcon, LikesIcon, StatIcon } from "./Icons";
+import { StatIcon } from "./Icons";
 
 export const SocialStarBanner = () => (
   <section className="relative w-full max-w-[850px] overflow-hidden rounded-[20px] bg-[linear-gradient(110deg,#02451C_0%,#056C2B_35%,#01230D_100%)] flex items-center min-h-[130px] md:min-h-[160px] shadow-lg">
@@ -41,17 +41,33 @@ export const SocialStarBanner = () => (
       {/* Stat Icons */}
       <div className="flex gap-2 md:gap-6">
         <StatIcon
-          icon={<PostsIcon />}
+          icon={<Image src="/posts.webp" alt="Posts" width={24} height={24} />}
           label="Posts"
           colorClass="border-[#00b4d8] text-[#00b4d8]"
         />
         <StatIcon
-          icon={<FollowersIcon />}
+          icon={
+            <Image
+              src="/followers.webp"
+              alt="Followers"
+              width={24}
+              height={24}
+              priority
+            />
+          }
           label="Followers"
           colorClass="border-[#f97316] text-[#f97316]"
         />
         <StatIcon
-          icon={<LikesIcon />}
+          icon={
+            <Image
+              src="/likes.webp"
+              alt="Likes"
+              width={24}
+              height={24}
+              priority
+            />
+          }
           label="Likes"
           colorClass="border-[#c084fc] text-[#c084fc]"
         />
