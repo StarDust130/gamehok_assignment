@@ -1,7 +1,7 @@
 ## GameHok Assignment 🌟
 
 <p align="center">
-    <img src="public/anime-profile-pic.webp" alt="Hero preview image" width="720" />
+    <img src="public/ss.png" alt="Hero preview image" width="720" />
 </p>
 
 <p align="center">
