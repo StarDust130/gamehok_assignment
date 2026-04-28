@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
-  { name: "My Tournament", href: "/my-tournament", icon: Trophy },
+  { name: "My Tournament", href: "/tournaments", icon: Trophy },
   { name: "Social", href: "/social", icon: Users },
   { name: "Chat", href: "/chat", icon: MessageSquare },
 ];
