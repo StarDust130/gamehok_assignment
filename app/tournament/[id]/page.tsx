@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   ArrowLeft,
   Share2,
@@ -11,6 +11,8 @@ import {
   Mail,
   Waypoints,
 } from "lucide-react";
+import { TournamentSkeleton } from "@/components/skeletons/TournamentSkeleton";
+import Link from "next/link";
 
 // ==========================================
 // 1. MOCK DATA (Matched EXACTLY to images)
@@ -21,10 +23,10 @@ const TOURNAMENT_DATA = {
   entry: "Entry - Free",
   organizer: {
     name: "GS ESPORTS",
-    logo: "/gs-logo.png", // Replace with your image
+    logo: "/organizer-logo.jpeg", // Replace with your image
     email: "gamersamy2709@gmail.com",
   },
-  banner: "/tournament-1.jpeg", // Replace with your image
+  banner: "/tournament-1.png", // Replace with your image
   registrationStatus: "Ongoing",
   participants: "864/864",
   details: {
@@ -78,7 +80,7 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
         </span>
         <span className="text-[15px] font-black text-white flex items-center gap-1.5">
           {data.prizePool}{" "}
-          <img src="/gamehok-coin.webp" alt="coin" className="w-4 h-4" />
+          <img src="/coin.webp" alt="coin" className="w-4 h-4" />
         </span>
       </div>
       {data.prizeDistribution.map((prize, idx) => (
@@ -91,7 +93,7 @@ const PrizePoolModule = ({ data }: { data: typeof TOURNAMENT_DATA }) => (
           </span>
           <span className="text-[14px] font-bold text-white/90 flex items-center gap-1.5">
             {prize.amount}{" "}
-            <img src="/gamehok-coin.webp" alt="coin" className="w-4 h-4" />
+            <img src="/coin.webp" alt="coin" className="w-4 h-4" />
           </span>
         </div>
       ))}
@@ -106,16 +108,32 @@ export default function TournamentDetailPage() {
   const [activeTab, setActiveTab] = useState<
     "Overview" | "Teams" | "Lobbies" | "Rules"
   >("Overview");
+  const [isLoading, setIsLoading] = useState(true);
   const data = TOURNAMENT_DATA;
+
+  useEffect(() => {
+    // Simulate loading time (500ms for smooth transition)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <TournamentSkeleton />;
+  }
 
   return (
     <div className="min-h-screen bg-[#050C08] text-white font-sans selection:bg-[#00d26a] selection:text-black">
       <div className="max-w-[1100px] mx-auto px-4 md:px-6 pt-4 md:pt-6 pb-32 md:pb-8">
         {/* TOP NAVIGATION */}
         <div className="flex justify-between items-center mb-4">
-          <button className="flex items-center gap-2 text-[13px] font-bold text-white/90 hover:text-white transition-colors">
-            <ArrowLeft size={16} strokeWidth={2.5} /> Back
-          </button>
+          <Link href="/" className="cursor-pointer">
+            <button className="flex items-center gap-2 text-[13px] font-bold text-white/90 hover:text-white transition-colors cursor-pointer">
+              <ArrowLeft size={16} strokeWidth={2.5} /> Back
+            </button>
+          </Link>
           <button className="w-8 h-8 rounded-full bg-[#1b3523] flex items-center justify-center hover:bg-[#254a31] transition-colors">
             <Share2 size={14} className="text-white" />
           </button>

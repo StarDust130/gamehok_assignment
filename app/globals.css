@@ -37,44 +37,66 @@
 
 /* 1. Dimensions */
 ::-webkit-scrollbar {
-  width: 10px;  /* Width for vertical scrollbars */
+  width: 10px; /* Width for vertical scrollbars */
   height: 10px; /* Height for horizontal scrollbars */
 }
 
 /* 2. Track (The background) */
 ::-webkit-scrollbar-track {
-  background: #050C08; 
-  border-left: 1px solid #122b1a; 
+  background: #050c08;
+  border-left: 1px solid #122b1a;
 }
 
 /* 3. Thumb Vertical (The draggable part) */
 ::-webkit-scrollbar-thumb:vertical {
-  background: linear-gradient(to bottom, #023e16, #0a7a3b); /* Subtle dark green gradient */
-  border-radius: 8px; 
-  border: 2px solid #050C08; /* Padded floating effect */
+  background: linear-gradient(
+    to bottom,
+    #023e16,
+    #0a7a3b
+  ); /* Subtle dark green gradient */
+  border-radius: 8px;
+  border: 2px solid #050c08; /* Padded floating effect */
 }
 
 /* 4. Thumb Horizontal (Matches light direction) */
 ::-webkit-scrollbar-thumb:horizontal {
   background: linear-gradient(to right, #023e16, #0a7a3b);
-  border-radius: 8px; 
-  border: 2px solid #050C08;
+  border-radius: 8px;
+  border: 2px solid #050c08;
 }
 
 /* 5. Thumb Hover State - Vertical */
 ::-webkit-scrollbar-thumb:vertical:hover {
-  background: linear-gradient(to bottom, #00d26a, #04f07a); /* Bright neon gradient */
-  border: 2px solid #050C08; 
+  background: linear-gradient(
+    to bottom,
+    #00d26a,
+    #04f07a
+  ); /* Bright neon gradient */
+  border: 2px solid #050c08;
 }
 
 /* 6. Thumb Hover State - Horizontal */
 ::-webkit-scrollbar-thumb:horizontal:hover {
   background: linear-gradient(to right, #00d26a, #04f07a);
-  border: 2px solid #050C08; 
+  border: 2px solid #050c08;
 }
 
 /* 7. Firefox Fallback (Firefox doesn't support webkit gradients yet) */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #0a7a3b #050C08;
+  scrollbar-color: #0a7a3b #050c08;
+}
+
+/* ==========================================
+   SKELETON LOADING ANIMATION
+   Smooth shimmer effect for skeleton loaders
+   ========================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }

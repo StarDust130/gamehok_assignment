@@ -1,6 +1,6 @@
 "use client";
 
-
+import { useState, useEffect } from "react";
 import {
   SocialStarBanner,
   FeaturedTournaments,
@@ -9,9 +9,24 @@ import {
   DailyBattles,
   WatchBestTournaments,
 } from "@/components/home";
-
+import { HomeSkeleton } from "@/components/skeletons/HomeSkeleton";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time (500ms for smooth transition)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
+
   return (
     <div className="flex flex-col lg:flex-row min-h-full divide-y lg:divide-y-0 lg:divide-x divide-[#1b3523] w-full max-w-360 mx-auto px-4 md:px-6 lg:px-8">
       {/* ====================================================================
