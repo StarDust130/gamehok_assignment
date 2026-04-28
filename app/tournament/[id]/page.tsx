@@ -324,7 +324,7 @@ export default function TournamentDetailPage() {
         </div>
 
         {/* TITLE & ORGANIZER SECTION */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex justify-between items-start mb-4">
           <div>
             <h1 className="text-[20px] md:text-[26px] font-black uppercase tracking-wide leading-tight">
               {data.title}
