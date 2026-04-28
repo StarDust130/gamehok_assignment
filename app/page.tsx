@@ -12,6 +12,55 @@ const irishGrover = Irish_Grover({
   display: 'swap',
 });
 
+// 1. Pixel-Perfect Target SVGs (Ultra-thin 1px strokes, no fills)
+const PostsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]">
+    {/* Image Rect */}
+    <rect x="4" y="5" width="14" height="14" rx="2" strokeLinecap="round" />
+    {/* Mountains */}
+    <path d="M4 14l3.5-3.5 2.5 2.5 3-3 5 5" strokeLinecap="round" strokeLinejoin="round" />
+    {/* Sun */}
+    <circle cx="9" cy="9" r="1.5" />
+    {/* Circle Plus Badge (Background fill matches gradient to hide lines underneath) */}
+    <circle cx="19" cy="5" r="4.5" fill="#045622" stroke="currentColor" />
+    <path d="M17 5h4M19 3v4" strokeLinecap="round" />
+  </svg>
+);
+
+const FollowersIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]">
+    {/* Center User */}
+    <circle cx="10" cy="10" r="2.5" />
+    <path d="M15 17v-1a3 3 0 0 0-3-3H8a3 3 0 0 0-3 3v1" strokeLinecap="round" />
+    {/* Background Users */}
+    <path d="M14 9a2.5 2.5 0 0 1 0 5" strokeLinecap="round" />
+    <path d="M17 17v-1a3 3 0 0 0-2-2.8" strokeLinecap="round" />
+    <path d="M6 9a2.5 2.5 0 0 0 0 5" strokeLinecap="round" />
+    {/* Chat Bubble Plus Badge */}
+    <path d="M16 3h5v4h-2l-1.5 1.5V7h-1.5V3z" fill="#045622" stroke="currentColor" strokeLinejoin="round" />
+    <path d="M17.5 5h2M18.5 4v2" strokeLinecap="round" />
+  </svg>
+);
+
+const LikesIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="w-[20px] h-[20px] md:w-[24px] md:h-[24px]">
+    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3ZM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+// 2. Transparent Stat Wrapper (No bg-black fill, pure 1px colored border)
+const StatIcon = ({ icon, label, colorClass }) => (
+  <div className="flex flex-col items-center gap-1.5 md:gap-2">
+    <div 
+      className={`flex items-center justify-center w-[42px] h-[42px] md:w-[50px] md:h-[50px] rounded-full border border-solid bg-transparent ${colorClass}`}
+    >
+      {icon}
+    </div>
+    <span className="text-[10px] md:text-[12px] font-bold text-white tracking-wide">
+      {label}
+    </span>
+  </div>
+);
 export default function Home() {
   const gamesScrollRef = useRef<HTMLDivElement>(null);
   
@@ -27,50 +76,61 @@ export default function Home() {
     <div className="flex flex-col lg:flex-row min-h-full divide-y lg:divide-y-0 lg:divide-x divide-[#1b3523] w-full max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8">
       {/* Left Content Area */}
       <div className="w-full lg:w-[68%] space-y-8 py-6 lg:py-8 lg:pr-8">
-        {/* 1. Social Star Banner */}
-        <section className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#035b21] via-[#023e16] to-[#01250d] p-6 lg:p-8 flex items-center">
-          <div className="relative z-10 w-2/3">
-            <h2 className="text-2xl md:text-3xl font-extrabold mb-1 text-white">
-              Be the Gamehok&apos;s{" "}
+        {/* 1. Social Star Banner 🌟  */}
+        <section className="relative w-full max-w-[850px] overflow-hidden rounded-[20px] bg-[linear-gradient(110deg,#02451C_0%,#056C2B_35%,#01230D_100%)] flex items-center min-h-[160px] md:min-h-[190px] shadow-lg">
+          {/* Single Star Element.
+        Mobile: Anchored off the left edge (-left-6)
+        Desktop: Anchored to the right edge (right-4)
+      */}
+          <div className="absolute left-2 md:left-auto md:right-12 top-1/2 -translate-y-1/2 w-[150px] h-[150px]  pointer-events-none z-0">
+            <Image
+              src="/star.webp"
+              alt="Star"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+
+    
+          <div className="relative z-10 w-full pl-[180px] pr-4 py-5 md:px-10 md:py-8 md:w-[65%] flex flex-col justify-center">
+            {/* Exact Typography Breaks matching the target images */}
+            <h2 className="text-[18px] md:text-[25px] font-bold text-white leading-[1.25] md:leading-[1.1] mb-2 tracking-tight">
+              Be the Gamehok&apos;s
+              <span className="md:hidden">
+                <br />
+              </span>
+              <span className="hidden md:inline"> </span>
               <span className="text-[#f59e0b]">Social Star</span>
             </h2>
-            <p className="text-white text-sm md:text-base font-semibold mb-6">
-              Earn rewards by levelling up your social game
+
+            <p className="text-white/95 text-[14px] md:text-[15px] font-semibold mb-5 md:mb-6 mt-2 leading-[1.4] max-w-[180px] md:max-w-none">
+              Earn rewards by levelling up
+              <span className="md:hidden">
+                <br />
+              </span>
+              <span className="hidden md:inline"> </span>
+              your social game
             </p>
-            <div className="flex gap-4 sm:gap-6">
+
+            {/* Mapped exactly to the target's hex colors for Cyan, Orange, and Purple */}
+            <div className="flex gap-4 md:gap-6">
               <StatIcon
-                icon={
-                  <Image
-                    src="/logo.png"
-                    width={18}
-                    height={18}
-                    alt="Post"
-                    className="opacity-80"
-                  />
-                }
+                icon={<PostsIcon />}
                 label="Posts"
-                colorClass="border-[#38bdf8] text-[#38bdf8]"
+                colorClass="border-[#00b4d8] text-[#00b4d8]"
               />
               <StatIcon
-                icon={<Users size={18} className="opacity-80" />}
+                icon={<FollowersIcon />}
                 label="Followers"
-                colorClass="border-[#fb923c] text-[#fb923c]"
+                colorClass="border-[#f97316] text-[#f97316]"
               />
               <StatIcon
-                icon={<Heart size={18} className="opacity-80" />}
+                icon={<LikesIcon />}
                 label="Likes"
                 colorClass="border-[#c084fc] text-[#c084fc]"
               />
             </div>
-          </div>
-          <div className="absolute right-[-40px] md:right-[-20px] top-1/2 -translate-y-1/2 w-1/2 flex items-center justify-end pr-4">
-            <Image
-              src="/star.webp"
-              alt="Star"
-              width={220}
-              height={220}
-              className="object-contain relative z-20 scale-110 md:scale-100 drop-shadow-[0_0_30px_#22c55e]"
-            />
           </div>
         </section>
 
@@ -93,7 +153,7 @@ export default function Home() {
               pool="200000"
               participants="864/864"
               status="Ongoing"
-              image="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80"
+              image="/tournament-1.jpeg"
               badgeColor="bg-[#4c1d95] shadow-purple-900/50"
             />
             <TournamentCard
@@ -104,11 +164,10 @@ export default function Home() {
               pool="20000"
               participants="517/576"
               status="Ongoing"
-              image="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80"
+              image="/tournament-2.jpeg"
               badgeColor="bg-[#9f1239] shadow-purple-900/50"
             />
           </div>
-  
         </section>
         <hr className="border-[#1b3523] my-8 w-full hidden md:block" />
 
@@ -375,16 +434,7 @@ export default function Home() {
   );
 }
 
-function StatIcon({ icon, label, colorClass }: { icon: React.ReactNode, label: string, colorClass: string }) {
-  return (
-    <div className="flex flex-col items-center">
-      <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full border bg-transparent flex items-center justify-center md:mb-1 transition-colors shadow-inner ${colorClass}`}>
-        {icon}
-      </div>
-      <span className="text-[10px] md:text-[11px] text-white mt-1 font-bold">{label}</span>
-    </div>
-  );
-}
+
 
 function TournamentCard({ title, game, mode, entry, pool, participants, status, image, badgeColor }: any) {
   return (
